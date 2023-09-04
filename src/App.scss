@@ -1,0 +1,52 @@
+.App {
+    padding: 10px;
+    & > div {
+        margin-bottom: 20px;
+    }
+}
+.date-config {
+    display: flex;
+    align-items: center;
+
+    & > div {
+        margin-right: 30px;
+    }
+}
+
+.interest-rate-config {
+    &__list-item {
+        display: flex;
+    }
+    &__item {
+        width: 20%;
+        margin-right: 10px;
+    }
+}
+
+.date-received-config {
+    &__item {
+        margin: 10px 0px;
+        &__list-date {
+            display: flex;
+            flex-wrap: wrap;
+
+            &__date-item {
+                width: 10%;
+            }
+        }
+    }
+}
+
+.money-config {
+    &__item {
+        margin: 10px 0px;
+
+        &__list-money {
+            display: flex;
+            flex-wrap: wrap;
+            &__money-item {
+                width: 10%;
+            }
+        }
+    }
+}
