@@ -22,20 +22,20 @@ const defaultReceivedMoney = {
   "4/2022": "2022-04-04",
   "5/2022": "2022-05-04",
   "6/2022": "2022-06-02",
-  "7/2022": "2022-07-04",
+  "7/2022": "2022-06-30",
   "8/2022": "2022-08-02",
   "9/2022": "2022-08-31",
   "10/2022": "2022-10-03",
   "11/2022": "2022-11-02",
   "12/2022": "2022-12-02",
-  "1/2023": "2022-12-22",
+  "1/2023": "2022-12-29",
   "2/2023": "2022-12-29",
   "3/2023": "2023-02-28",
   "4/2023": "2023-03-30",
   "5/2023": "2023-04-28",
   "6/2023": "2023-06-01",
   "7/2023": "2023-06-30",
-  "8/2023": "2023-06-30",
+  "8/2023": "2023-08-11",
   "9/2023": "2023-09-09",
   "10/2023": "2023-09-09",
   "11/2023": "2023-09-09",
@@ -170,11 +170,14 @@ function App() {
           money: receivedMoney.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
         }
         const receivedDateObj = new Date(rd.dates[iDate]);
+        receivedDateObj.setDate(receivedDateObj.getDate() + 1);
         if (dateEndObj >= receivedDateObj && receivedDateObj >= dateBeginObj) {
           let prevTotalDay = 0;
           for (let iir = 0; iir < interestRates.length; iir++) {
             const ir = interestRates[iir];
-            let dateCalculate = dateEndObj;
+            let dateCalculate = new Date(datePay);
+            dateCalculate.setDate(dateCalculate.getDate() - 1);
+            console.log(dateCalculate)
             const lastDateOfYear = new Date(ir.year, 11, 31);
             if (lastDateOfYear < dateCalculate) {
               dateCalculate = lastDateOfYear;
@@ -185,12 +188,6 @@ function App() {
             }
 
             prevTotalDay += distance;
-            if (iir === 0 || iir === interestRates.length - 1) {
-              distance -= 1;
-            }
-            if (distance < 0) {
-              distance = 0;
-            }
             resultItem["totalDay_" + ir.year] = distance;
 
             const interestMoney = distance * ir.value * receivedMoney;
